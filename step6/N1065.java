@@ -15,7 +15,7 @@ public class N1065 {
 		int ans = 0;
 	    if(N<100)
 	    {
-	    	System.out.println("99");
+	    	System.out.println(N);
 	   
 	    }
 	    else 
