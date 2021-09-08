@@ -1,20 +1,34 @@
-package step4;
-
-import java.util.*;
-public class N10951 {
-
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+		package step4;
 		
-	
+		import java.io.BufferedWriter;
+		import java.io.IOException;
+		import java.io.OutputStreamWriter;
+		import java.util.*;
+		public class N10951 {
 		
-		while(true)
-		{
-			int A = sc.nextInt();
-			int B = sc.nextInt();
-			System.out.println(A+B);
+			public static void main(String[] args) throws IOException {
+				Scanner sc = new Scanner(System.in);
+				
+				int a = 0;
+				int b = 0;
+				
+				while(sc.hasNext())
+				{
+					a = sc.nextInt();
+					b = sc.nextInt();
+					
+					System.out.println(a+b);
+				
+				}
+					
+					
+				
+			
+			
+				
+				sc.close();
+		
+			}
+		
 		}
 
-	}
-
-}
