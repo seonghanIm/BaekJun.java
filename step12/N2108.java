@@ -1,111 +1,86 @@
-package step12;
+    import java.io.*;
+    import java.util.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
+    public class N2108 {
+        public static void main(String[] args) throws IOException {
 
-public class N2108 {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(System.out));
 
-	public static void main(String[] args) throws Exception, IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		int N = Integer.parseInt(br.readLine());
-		
-		int []num = new int[N];
-		
-		for(int i=0;i<N;i++)
-		{
-			num[i] = Integer.parseInt(br.readLine());
-		}
-		
-		System.out.println(MostFrequent(num));
-	   
+            int n = Integer.parseInt(br.readLine());
 
-	}
-	
-	
-	public static double Average(int []arr)
-	{	
-	    double result = 0;
-	
+            int[] numbers = new int[n];
 
-		for(int i=0;i<arr.length;i++)
-		{
-		    result += arr[i];
-		}
-		
-		result = result/arr.length;
-		return result;
-	}
-	
-	public static int Center(int []arr)
-	{
-		Arrays.sort(arr);
-		int index = arr.length/2;
-		
-		return arr[index];
-	}
-	
-	public static int MostFrequent(int []arr)
-	{
-		int []arr2 = new int[4001]; //양수배열 
-		int []arr3 = new int[4001]; //음수배열
-		int max = 0;
-		int max2 = 0;
-		int []result = new int[arr.length];
-		Arrays.sort(arr);
-		for(int i=0;i<arr.length;i++)
-		{
-		    if(arr[i]>=0)
-		    {
-		    	arr2[arr[i]]++;
-		    }else
-		    {
-		    	arr3[arr[i]*-1]++;
-		    }
-		    
-		}
-		for(int i=0;i<10;i++)
-		{
-			if(arr2[i]>max)
-			{
-				max = i;
-			}
-			if(arr3[i]>max)
-			{
-				max2 = i;
-			}
-			
-		}
-		result[0] = max;
-		int []result2 = new int[arr.length];
-		result[2];
-		for(int i = 0;i<4001;i++)
-		{
-			if(arr2[i]==max)
-			{
-				result[i+1] = i;
-			}
-		}
-		
-		Arrays.sort(result);
-		return result[1];
-		
+            for(int i=0;i<n;i++)
+            {
+                numbers[i] = Integer.parseInt(br.readLine());
+            }
+            Arrays.sort(numbers);
+            System.out.println((int)avg(numbers));
+            System.out.println(median(numbers));
+            System.out.println(counting(numbers));
+            System.out.println(range(numbers));
 
-		
-	}
-	public static int Range(int []arr)
-	{
-		int max, min =0;
-		Arrays.sort(arr);
-		max = arr[0];
-		min = arr[arr.length-1];
-		
-		return max - min;
-	
-	}
-	
-	
 
-}
+        }
+        public static double avg(int[] arr)
+        {
+            double sum=0;
+            for(int i=0;i<arr.length;i++)
+            {
+                sum+=arr[i];
+            }
+
+            double result = (double)sum/arr.length;
+            String formattedResult = String.format("%.1f", result);
+            result = Math.round(result);
+            return result;
+        }
+        public static int median(int[] arr)
+        {
+            Arrays.sort(arr);
+            int index = arr.length/2;
+            return arr[index];
+        }
+
+        public static int counting(int[] arr)
+        {
+            int[] check = new int[8001];
+            int max = 0;
+            List<Integer> list = new ArrayList<>();
+
+            for(int i=0;i<arr.length;i++)
+            {
+                check[arr[i]+4000]++;
+            }
+            for(int i = 0;i<check.length;i++)
+            {
+                if(check[i]>=max)
+                {
+                    max = check[i];
+                }
+            }
+            for(int i = 0;i<check.length;i++)
+            {
+                if(check[i]==max)
+                {
+                    list.add(i-4000);
+                }
+
+            }
+            if(list.size()==1)
+            {
+                return list.get(0);
+            }
+            else {
+                Collections.sort(list);
+                return list.get(1);
+
+            }
+        }
+        public static int range(int[] arr)
+        {
+            return arr[arr.length-1] - arr[0];
+        }
+
+    }
